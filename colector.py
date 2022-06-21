@@ -32,7 +32,6 @@ def colector():
 
     '''
     link, file_name = user_inputs()
-
-
+    #print(link,file_name)
 
 colector()
