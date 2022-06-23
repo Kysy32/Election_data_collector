@@ -91,6 +91,19 @@ def find_electoral_parties(links):
     for party in parties:
         parties_list.append(party.getText()) # get a party name and append it to the list
 
+    return parties_list
+
+def create_header(parties):
+    '''
+    Create header for csv file
+    :param parties:
+    '''
+
+    header = ["Kód obce", "Název obce", "Voliči v seznamu", "Vydané obálky", "Platné hlasy"]
+
+    header.extend(parties)
+
+    return header
 
 def colector():
     '''
@@ -102,8 +115,9 @@ def colector():
     split_html = soup(string_html)
     links = td_tags(split_html)
     parties = find_electoral_parties(links)
-    print(parties)
+    header = create_header(parties)
 
+    print(header)
 
 
 # run the web scraping
