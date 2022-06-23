@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 def user_inputs():
     '''
-    Control if user inputs are correct.
+    Controls if user inputs are correct.
     :return: link, file_name
     '''
 
@@ -42,7 +42,7 @@ def user_inputs():
 
 def html_to_str(link):
     '''
-    Take a html code and transform it to the string
+    Takes a html code and transform it to the string
     :param link:
     '''
 
@@ -53,7 +53,7 @@ def html_to_str(link):
 
 def soup(string_html):
     '''
-    Transform html_string to soup object
+    Transforms html_string to soup object
     :param string_html:
     '''
 
@@ -63,7 +63,7 @@ def soup(string_html):
 
 def td_tags(split_html):
     '''
-    Create link with open page with data for all municipalities
+    Creates link with open page with data for all municipalities
     :param split_html:  
     '''
 
@@ -95,7 +95,7 @@ def find_electoral_parties(links):
 
 def create_header(parties):
     '''
-    Create header for csv file
+    Creates header for csv file
     :param parties:
     '''
 
@@ -104,6 +104,61 @@ def create_header(parties):
     header.extend(parties)
 
     return header
+
+def create_names_list(link):
+    '''
+    Creates a list of municipalities names
+    :param link:
+    '''
+    name_list = []
+
+    html_str = get(link)
+    soup = BeautifulSoup(html_str.content, 'html.parser')
+    names = soup.find_all(class_="overflow_name")
+
+    for name in names:
+        name_list.append(name.getText())
+
+    return name_list
+
+def create_codes_list(link):
+    '''
+    Creates a list of municipalities codes
+    :param link:
+    '''
+    code_list = []
+
+    html_str = get(link)
+    soup = BeautifulSoup(html_str.content, 'html.parser')
+    codes = soup.find_all(class_="cislo")
+
+    for code in codes:
+        code_list.append(code.getText())
+
+    return code_list
+
+def create_votes_information(links):
+
+    votes_info = []
+
+    for link in links:
+        list = []
+
+        html_str = get(link)
+        soup = BeautifulSoup(html_str.text, 'html.parser')
+
+        electorate = soup.find("td", {"headers": "sa2"}).text
+        envelopes =  soup.find("td", {"headers": "sa3"}).text
+        valid_votes =  soup.find("td", {"headers": "sa6"}).text
+
+        list.append(electorate)
+        list.append(envelopes)
+        list.append(valid_votes)
+
+        votes_info.append(list)
+
+    return votes_info
+
 
 def colector():
     '''
@@ -114,11 +169,19 @@ def colector():
     string_html = html_to_str(link)
     split_html = soup(string_html)
     links = td_tags(split_html)
-    parties = find_electoral_parties(links)
-    header = create_header(parties)
 
-    print(header)
+    parties = find_electoral_parties(links) # list with parties in region
+    header = create_header(parties) # prepare header for csv file
+
+    name_list = create_names_list(link) # list with municipalities names
+    code_list = create_codes_list(link) # list with municipalities codes
+    vote_info_list = create_votes_information(links)
+
+    print((vote_info_list))
+
+
 
 
 # run the web scraping
-colector()
+if __name__ == "__main__":
+    colector()
