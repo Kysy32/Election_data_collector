@@ -47,9 +47,9 @@ def html_to_str(link):
     '''
 
     html = get(link) # take html from web
-    string = html.text # transform html to string
+    string_html = html.text # transform html to string
 
-    return string
+    return string_html
 
 def soup(string_html):
     '''
@@ -77,6 +77,19 @@ def td_tags(split_html):
 
     return links
 
+def find_electoral_parties(links):
+    '''
+    Finds all electoral parties in the monitored region
+    :param link:
+    '''
+    parties_list = [] # empty list for parties in monitored region
+
+    html_str = get(links[0])
+    soup = BeautifulSoup(html_str.content, 'html.parser')
+    parties = soup.find_all(class_="overflow_name")
+
+    for party in parties:
+        parties_list.append(party.getText()) # get a party name and append it to the list
 
 
 def colector():
@@ -88,7 +101,9 @@ def colector():
     string_html = html_to_str(link)
     split_html = soup(string_html)
     links = td_tags(split_html)
-    print(links)
+    parties = find_electoral_parties(links)
+    print(parties)
+
 
 
 # run the web scraping
