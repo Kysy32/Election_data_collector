@@ -151,9 +151,9 @@ def create_votes_information(links):
         envelopes =  soup.find("td", {"headers": "sa3"}).text
         valid_votes =  soup.find("td", {"headers": "sa6"}).text
 
-        list.append(electorate)
-        list.append(envelopes)
-        list.append(valid_votes)
+        list.append(electorate.replace("\xa0", ""))
+        list.append(envelopes.replace("\xa0", ""))
+        list.append(valid_votes.replace("\xa0", ""))
 
         votes_info.append(list)
 
@@ -177,7 +177,7 @@ def colector():
     code_list = create_codes_list(link) # list with municipalities codes
     vote_info_list = create_votes_information(links)
 
-    print((vote_info_list))
+    print(vote_info_list)
 
 
 
