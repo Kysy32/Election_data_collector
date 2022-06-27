@@ -133,7 +133,7 @@ def create_codes_list(link):
     codes = soup.find_all(class_="cislo")
 
     for code in codes:
-        code_list.append(code.getText()) # get a village name and append it to the list
+        code_list.append(code.getText()) # get a village code and append it to the list
 
     return code_list
 
