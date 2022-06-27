@@ -26,7 +26,7 @@ def user_inputs():
         quit()
 
     elif "https://volby.cz/pls/ps2017nss/" not in sys.argv[1]: # control if user used a correct link
-            print("Please insert link on election result on first position (from portal volby.cz")
+            print("Please insert link on election result on first position (from portal volby.cz)")
             quit()
 
     else:
@@ -63,13 +63,13 @@ def soup(string_html):
 
 def td_tags(split_html):
     '''
-    Creates link with open page with data for all municipalities
+    Creates link witch open page with data for all municipalities
     :param split_html:  
     '''
 
     tags = split_html.find_all("td", {"class": "cislo"})
 
-    links = []
+    links = [] # empty list for links
     for tag in tags:
         x = tag.a['href']
         link = f'https://volby.cz/pls/ps2017nss/{x}'
@@ -117,7 +117,7 @@ def create_names_list(link):
     names = soup.find_all(class_="overflow_name")
 
     for name in names:
-        name_list.append(name.getText())
+        name_list.append(name.getText()) # get a village name and append it to the list
 
     return name_list
 
@@ -133,7 +133,7 @@ def create_codes_list(link):
     codes = soup.find_all(class_="cislo")
 
     for code in codes:
-        code_list.append(code.getText())
+        code_list.append(code.getText()) # get a village name and append it to the list
 
     return code_list
 
@@ -158,7 +158,6 @@ def create_votes_statistic_list(links):
         list.append(voter.replace("\xa0", ""))
         list.append(envelopes.replace("\xa0", ""))
         list.append(valid_votes.replace("\xa0", ""))
-
 
         votes_info.append(list)
 
@@ -207,10 +206,12 @@ def save_data_to_one_list(code_list, name_list, vote_statistic_list, parties_sta
     # joins lists using indexes
     for x in range(0,len(name_list)):
         temp = []
+
         temp.append(code_list[x])
         temp.append(name_list[x])
         temp.extend(vote_statistic_list[x])
         temp.extend(parties_statistic_list[x])
+
         data_list.append(temp) # create list with all data for one municipality
 
     return data_list
@@ -222,6 +223,7 @@ def write_data_to_csv(file_name,header, final_dataset):
     :return:
     '''
 
+    # write the data to csv file
     with open(file_name, mode='w', encoding='utf-8', newline='') as new_csv:
         writer = csv.writer(new_csv)
         writer.writerow(header)
@@ -230,7 +232,7 @@ def write_data_to_csv(file_name,header, final_dataset):
 
 def colector():
     '''
-    Webscraping the web and save the data like csv file.
+    Searching the web and save the data like csv file.
     '''
 
     # Proces function
