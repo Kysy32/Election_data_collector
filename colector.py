@@ -25,20 +25,19 @@ def user_inputs():
             sep="\n")
         quit()
 
-    elif "https://volby.cz/pls/ps2017nss/" not in sys.argv[1]: # control if user used a correct link
-            print("Please insert link on election result on first position (from portal volby.cz)")
-            quit()
+    elif not sys.argv[1].startswith('https://volby.cz/pls/ps2017nss/'): # control if user used a correct link
+        print("Please insert link on election result on first position (from portal volby.cz)")
+        quit()
+
+    elif not sys.argv[2].endswith('.csv'): # control if user use csv file
+        print('You must insert "file_name.csv"')
+        quit()
 
     else:
-        if sys.argv[2].endswith('.csv'): # control if user use csv file
-            link = sys.argv[1]
-            file_name = sys.argv[2]
+        link = sys.argv[1]
+        file_name = sys.argv[2]
 
-            return link, file_name
-
-        else:
-            print('You must insert "file_name.csv"')
-            quit()
+        return link, file_name
 
 def html_to_str(link):
     '''
