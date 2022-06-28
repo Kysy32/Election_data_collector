@@ -232,7 +232,7 @@ def write_data_to_csv(file_name,header, final_dataset):
 
 def colector():
     '''
-    Searching the web and save the data like csv file.
+    Searches the web and save the data like csv file.
     '''
 
     # Proces function
