@@ -50,6 +50,7 @@ def html_to_str(link):
 
     return string_html
 
+
 def soup(string_html):
     '''
     Transforms html_string to soup object
