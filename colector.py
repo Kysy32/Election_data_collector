@@ -1,5 +1,5 @@
 """
-colector.py: Third project to Engeto Online Python Academy
+collector.py: Third project to Engeto Online Python Academy
 author: Jakub Kyselý
 email: jkysely@centrum.cz
 discord: Kysy#6104
@@ -21,7 +21,7 @@ def user_inputs():
     if len(sys.argv) != 3: # control if user used all arguments
         print(
             "Missing arguments to run:  'script name', 'link' or 'file name (.csv)",
-            "Entry: python colector.py 'link', 'file_name.csv'",
+            "Entry: python collector.py 'link', 'file_name.csv'",
             sep="\n")
         quit()
 
