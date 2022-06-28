@@ -261,7 +261,7 @@ def colector():
     # Create csv file with selected data
     write_data_to_csv(file_name,header,final_dataset)
 
-    print('TERMINATING colector.py, ALL DATA ARE SAVED. ')
+    print('TERMINATING collector.py, ALL DATA ARE SAVED. ')
 
 # run the web scraping
 if __name__ == "__main__":
