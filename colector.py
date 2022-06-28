@@ -241,6 +241,8 @@ def colector():
     split_html = soup(string_html)
     links = td_tags(split_html)
 
+    print(f'DOWNLOADING DATA FROM URL: {link}')
+
     # Create header for csv file
     parties = find_electoral_parties(links) # list with parties in region
     header = create_header(parties) # prepare header for csv file
@@ -254,8 +256,12 @@ def colector():
     # Save all selected data to one list
     final_dataset = save_data_to_one_list(code_list,name_list,vote_statistic_list,parties_statistic_list)
 
+    print(f'SAVING DATA TO FILE: {file_name}')
+
     # Create csv file with selected data
     write_data_to_csv(file_name,header,final_dataset)
+
+    print('TERMINATING colector.py, ALL DATA ARE SAVED. ')
 
 # run the web scraping
 if __name__ == "__main__":
