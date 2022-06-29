@@ -34,6 +34,7 @@ SAVING DATA TO FILE: Zdar_nad_Sazavou.csv
 TERMINATING collector.py, ALL DATA ARE SAVED. 
 
 ###Sample output
+
 Kód obce,Název obce,Voliči v seznamu,Vydané obálky,Platné hlasy,......
 595217,Baliny,102,71,71,8,0,0,6,0,3,8,2,1,0,0,0,8,0,6,12,0,8,0,0,0,1,5,3
 595241,Blažkov,229,162,161,7,0,0,15,0,9,26,2,3,4,1,1,13,0,3,36,0,16,0,0,0,0,25,0
